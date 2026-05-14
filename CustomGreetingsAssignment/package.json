@@ -1,0 +1,14 @@
+{
+  "name": "custom-greetings-app",
+  "version": "1.0.0",
+  "scripts": {
+    "start:server": "cd server && npm run dev",
+    "start:web": "cd web && npm run dev",
+    "dev": "concurrently \"npm run start:server\" \"npm run start:web\"",
+    "install:all": "npm install && cd server && npm install && cd ../web && npm install",
+    "seed": "curl -X POST http://localhost:5000/api/templates/seed"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
