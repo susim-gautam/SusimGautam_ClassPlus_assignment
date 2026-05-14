@@ -1,0 +1,22 @@
+.page--login .page__title,
+.page--profile .page__title {
+  text-align: left;
+}
+
+.page--login .page__lead,
+.page--profile .page__lead {
+  text-align: left;
+}
+
+.login-section-title {
+  margin: 0 0 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #64748b;
+}
+
+.login-error {
+  margin: 0 0 1rem;
+}
