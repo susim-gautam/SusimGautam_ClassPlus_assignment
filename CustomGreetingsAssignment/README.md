@@ -4,11 +4,11 @@ A premium MERN stack application for creating personalized greeting cards with l
 
 ## Features
 
-- **Multi-method Authentication**: Email/Password and Guest login.
+- **Multi-method Authentication**: Google OAuth, Email/Password, and Guest login.
 - **Profile Customization**: Users can upload a profile picture and set their name, which automatically overlays on greeting templates.
 - **Template Library**: Categorized grid of templates (Birthday, Anniversary, Festivals).
 - **Live Overlay Preview**: Instant visualization of the user's details on the selected template using CSS overlays.
-- **Image Merging & Sharing**: High-quality canvas merging of layers into a single image for native sharing or downloading.
+- **Image Merging & Sharing**: High-quality canvas merging with a live preview and native sharing sheet (mobile) or direct download fallback (desktop).
 - **Monetization**: Clear distinction between free and premium templates with a subscription upsell flow.
 
 ## Tech Stack
