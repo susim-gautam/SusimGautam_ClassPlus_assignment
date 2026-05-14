@@ -29,13 +29,17 @@ const HomeOrSetup: React.FC = () => {
   return <HomePage />;
 };
 
+import { GoogleOAuthProvider } from '@react-oauth/google';
+
 const App: React.FC = () => {
   return (
-    <AuthProvider>
-      <Router>
-        <AppRoutes />
-      </Router>
-    </AuthProvider>
+    <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
+      <AuthProvider>
+        <Router>
+          <AppRoutes />
+        </Router>
+      </AuthProvider>
+    </GoogleOAuthProvider>
   );
 };
 

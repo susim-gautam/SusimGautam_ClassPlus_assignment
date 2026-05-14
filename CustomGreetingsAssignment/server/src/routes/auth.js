@@ -51,16 +51,24 @@ router.get('/me', auth, async (req, res) => {
   }
 });
 
-// Update Profile
-router.put('/profile', auth, async (req, res) => {
-  const { name, profilePic } = req.body;
+// Google Login
+router.post('/google', async (req, res) => {
+  const { name, email, profilePic } = req.body;
   try {
-    const user = await User.findByIdAndUpdate(
-      req.user.id,
-      { $set: { name, profilePic } },
-      { new: true }
-    ).select('-password');
-    res.json(user);
+    let user = await User.findOne({ email });
+    if (!user) {
+      user = new User({ 
+        name, 
+        email, 
+        profilePic, 
+        authMethod: 'google',
+        isPremium: false 
+      });
+      await user.save();
+    }
+    
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET || 'secret');
+    res.json({ token, user });
   } catch (err) {
     res.status(500).send('Server Error');
   }

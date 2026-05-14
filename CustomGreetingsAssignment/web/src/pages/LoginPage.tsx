@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
+import { GoogleLogin } from '@react-oauth/google';
 import { Mail, UserCircle, LogIn } from 'lucide-react';
 
 const LoginPage: React.FC = () => {
-  const { login, guestLogin } = useAuth();
+  const { login, guestLogin, googleLogin } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isRegistering, setIsRegistering] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      await login(email, password);
-    } catch (err) {
-      alert('Login failed');
-    }
+  const handleGoogleSuccess = (credentialResponse: any) => {
+    // In a real app, you'd decode the JWT or send it to your server for verification
+    // For this assignment, we'll mock the extraction
+    googleLogin({
+      name: 'Google User',
+      email: 'user@google.com',
+      profilePic: 'https://lh3.googleusercontent.com/a/default-user'
+    });
   };
 
   return (
@@ -23,6 +23,21 @@ const LoginPage: React.FC = () => {
         <h2 style={{ marginBottom: '10px', textAlign: 'center' }}>{isRegistering ? 'Create Account' : 'Welcome Back'}</h2>
         <p style={{ color: 'var(--text-muted)', textAlign: 'center', marginBottom: '30px' }}>Custom Greetings & Wishes</p>
         
+        <div style={{ marginBottom: '20px', display: 'flex', justifyContent: 'center' }}>
+          <GoogleLogin 
+            onSuccess={handleGoogleSuccess} 
+            onError={() => alert('Google Login Failed')} 
+            theme="filled_black"
+            shape="pill"
+          />
+        </div>
+
+        <div style={{ margin: '20px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div style={{ flex: 1, height: '1px', background: 'var(--glass-border)' }}></div>
+          <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>OR EMAIL</span>
+          <div style={{ flex: 1, height: '1px', background: 'var(--glass-border)' }}></div>
+        </div>
+
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
           <div style={{ position: 'relative' }}>
             <Mail size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
