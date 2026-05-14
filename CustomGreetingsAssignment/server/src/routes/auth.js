@@ -74,4 +74,19 @@ router.post('/google', async (req, res) => {
   }
 });
 
+// Update Profile
+router.put('/profile', auth, async (req, res) => {
+  const { name, profilePic } = req.body;
+  try {
+    const user = await User.findByIdAndUpdate(
+      req.user.id,
+      { $set: { name, profilePic } },
+      { new: true }
+    ).select('-password');
+    res.json(user);
+  } catch (err) {
+    res.status(500).send('Server Error');
+  }
+});
+
 module.exports = router;

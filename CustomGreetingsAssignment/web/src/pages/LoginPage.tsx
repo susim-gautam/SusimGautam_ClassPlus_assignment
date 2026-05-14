@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 import { GoogleLogin } from '@react-oauth/google';
 import { Mail, UserCircle, LogIn } from 'lucide-react';
 
@@ -6,6 +8,15 @@ const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isRegistering, setIsRegistering] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await login(email, password);
+    } catch (err) {
+      alert('Login failed');
+    }
+  };
 
   const handleGoogleSuccess = (credentialResponse: any) => {
     // In a real app, you'd decode the JWT or send it to your server for verification

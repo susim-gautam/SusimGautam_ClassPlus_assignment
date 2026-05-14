@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { Camera, Save } from 'lucide-react';
 
 const ProfileSetup: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
-  const { user, updateProfile } = useAuth();
+  const { user, updateProfile, logout } = useAuth();
   const [name, setName] = useState(user?.name || '');
   const [preview, setPreview] = useState(user?.profilePic || '');
 
@@ -59,6 +59,12 @@ const ProfileSetup: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
         <button onClick={handleSave} className="btn-primary" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
           <Save size={18} />
           Save & Continue
+        </button>
+        <button 
+          onClick={logout} 
+          style={{ background: 'none', color: 'var(--text-muted)', fontSize: '0.9rem', marginTop: '10px' }}
+        >
+          Logout & Start Over
         </button>
       </div>
     </div>
